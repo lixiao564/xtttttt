@@ -1,11 +1,18 @@
 const express = require('express');
-const express_hbs = require('express-handlebars');
-const path = require('path');
-const app = express();
+      express_hbs = require('express-handlebars'),
+      bodyParser = require('body-parser'),
+      path = require('path'),
+      app = express();
 
-const home = require('./server/router/home');
-const task = require('./server/router/task');
-const user = require('./server/router/user');
+const home = require('./server/router/home'),
+      task = require('./server/router/task'),
+      user = require('./server/router/user'),
+      customer = require('./server/router/customer');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 // 设置静态文件目录
 app.use('/views', express.static(path.join(__dirname, '/views')));
@@ -22,5 +29,6 @@ app.set('views', path.join(__dirname, '/views'));
 app.use('/', home);
 app.use('/task', task);
 app.use('/user', user);
+app.use('/customer', customer);
 
 app.listen(3000);
