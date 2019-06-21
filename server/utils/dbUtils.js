@@ -70,7 +70,7 @@ dbUtil.prototype.find = function (model, condition) {
 // 删除，默认删除所有匹配的
 dbUtil.prototype.delete = function (model, condition) {
     return new Promise((resolve, reject) => {
-        model.deleteMany(condition, (err, res) => {
+        model.deleteMany({_id: {$in: condition}}, (err, res) => {
             if (err) {
                 reject('remove err');
             } else {

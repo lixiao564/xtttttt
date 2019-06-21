@@ -4,18 +4,12 @@ const express = require('express'),
       utils = require('../utils/dbUtils');
 
 const userModel = utils.initSchema({
-    num: String,
     email: String,
     password: String,
     name: String,
     role: String,
-    age: Number,
-    cid: String,
-    date: String,
-    area: String,
     tel: String,
     dpt: String,
-    notes: String,
 }, 'user');
 
 
@@ -44,8 +38,9 @@ router.get('/list', (req, res) => {
 
 router.post('/add', (req, res) => {
     const body = req.body;
+    body.password = '123456';
     utils.add(userModel, body, {
-        num: body.num
+        tel: body.tel
     }).then(data => {
         res.send({
             code: 0,
@@ -59,6 +54,23 @@ router.post('/add', (req, res) => {
             msg: err
         });
     });
+});
+
+router.delete('/delete', (req, res) => {
+    const _id = req.body._id;
+    utils.delete(userModel, _id).then(data => {
+        res.send({
+            code: 0,
+            data: data,
+            msg: ''
+        });
+    }).catch(err => {
+        res.send({
+            code: -1,
+            data: '',
+            msg: err
+        });
+    })
 });
 
 module.exports = router;
