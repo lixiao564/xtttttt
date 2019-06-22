@@ -5,7 +5,7 @@ const express = require('express');
       app = express();
 
 const home = require('./server/router/home'),
-      task = require('./server/router/task'),
+      project = require('./server/router/project'),
       user = require('./server/router/user'),
       customer = require('./server/router/customer');
 
@@ -27,7 +27,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '/views'));
 
 app.use('/', home);
-app.use('/task', task);
+app.use('/project', project);
 app.use('/user', user);
 app.use('/customer', customer);
 
