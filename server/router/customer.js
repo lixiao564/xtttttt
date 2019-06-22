@@ -1,17 +1,10 @@
 const express = require('express'),
       path = require('path'),
       router = express.Router(),
-      utils = require('../utils/dbUtils');
+      utils = require('../utils/dbUtils'),
+      models = require('./models'),
+      customerModel = models.customerModel;
 
-const customerModel = utils.initSchema({
-    uid: String,
-    name: String,
-    customerType: String,
-    industryType: String,
-    area: String,
-    validDate: String,
-    basicInfo: String
-}, 'customer');
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../views/customer/customer.html'));

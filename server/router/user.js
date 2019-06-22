@@ -1,16 +1,9 @@
 const express = require('express'),
       path = require('path'),
       router = express.Router(),
-      utils = require('../utils/dbUtils');
-
-const userModel = utils.initSchema({
-    email: String,
-    password: String,
-    name: String,
-    role: String,
-    tel: String,
-    dpt: String,
-}, 'user');
+      utils = require('../utils/dbUtils'),
+      models = require('./models'),
+      userModel = models.userModel;
 
 
 router.get('/', (req, res) => {
