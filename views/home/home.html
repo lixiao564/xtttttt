@@ -6,15 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="/utils/jquery-easyui-1.7.0/themes/default/easyui.css">
+    <link rel="stylesheet" href="/utils/jquery-easyui-1.7.0/themes/icon.css">
+    <link rel="stylesheet" href="/views/customer/custom.css">
     <link rel="stylesheet" href="/views/home/home.css">
+
 </head>
 <body>
-    <h1>hello world!</h1>
-
-    <input class="easyui-datebox" style="width:50%">
-
+    <div class="main">
+        <!-- 这是上面部分 -->
+        <div class="head">
+            <h1>XTT&LX</h1>
+        </div>
+        <!-- 这是下面部分 -->
+        <div class="bottom">
+            <div class="left">
+                <div id="menu"></div>
+            </div>
+            <div class="content" id="content">
+                <div class="top" id="top">
+                   <h2 class="main-content">主要内容</h2>
+                </div>
+                <div class="page">
+                    <div id="page"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <div id="echa"></div>
+    <!-- <input class="easyui-datebox" style="width:50%"> -->
+    <script src="/utils/echarts.js"></script>
     <script src="/utils/jquery-easyui-1.7.0/jquery.min.js"></script>
     <script src="/utils/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+    <script src="/utils/jquery-easyui-1.7.0/locale/easyui-lang-zh_CN.js"></script>
+    <script src="/utils/filter.js"></script>
     <script src="/views/home/home.js"></script>
+
 </body>
 </html>

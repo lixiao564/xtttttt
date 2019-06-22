@@ -1,3 +1,60 @@
-h1 {
-    color: aqua;
+
+html {
+    height: 100%;
+}
+body{
+    margin: 0;
+    height: 100%;
+}
+
+.main {
+   position: relative;
+   height: 100%;
+
+}
+.head {
+    height: 50px;
+    background-color: rgb(86, 126, 158);
+
+}
+.bottom {
+    height: calc(100% - 50px);
+}
+
+.left {
+    float: left;
+    height: 100%;
+    width: 120px; 
+    cursor:pointer;
+    background-color: rgb(116, 197, 245);
+}
+
+.content {
+    position: relative;
+     background-color: rgb(255, 255, 255);
+     height: 100%;
+     margin-left: 120px;
+}
+
+.top {
+    height: 50px;
+    width: 100%;
+    background-color: rgb(219, 219, 221)
+}
+.main-content{
+    line-height: 50px;
+    margin: 0;
+    text-align: center;
+}
+
+.page {
+     height: calc(100% - 50px);
+     background-color: rgb(238, 237, 237);
+}
+
+.head h1 {
+    margin: 0 auto;
+    line-height: 50px;
+    text-align: center;
+    color: yellowgreen;
 }
