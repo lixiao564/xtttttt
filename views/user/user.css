@@ -1,0 +1,16 @@
+.look_input{
+    border: 0;
+
+}
+.look_table{
+    margin: 10px auto;
+    border-collapse: collapse;
+}
+.user_border  {
+    border: 1px black solid;
+}
+.user_border td {
+    width: 100px;
+    padding: 10px;
+    border: 1px black solid
+}

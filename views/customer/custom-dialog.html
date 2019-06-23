@@ -19,29 +19,6 @@
                 <td><input type="text" id="custom-type"></td>
             </tr>
             <tr>
-                <td class="head1">客户经理姓名：</td>
-                <td><input type="text" id="manager-name" class="easyui-textbox"></td>
-                <td class="head1">客户经理电话：</td>
-                <td><input type="text" id="manager-tel" class="easyui-textbox"></td>
-            </tr>
-            <tr>
-                <td class="head1">客户经理邮箱：</td>
-                <td><input type="text" id="manager-email" class="easyui-textbox"></td>
-                <td class="head1">一般纳税人：</td>
-                <td><input type="text" id="taxpayer" class="easyui-combobox" data-options="
-                    valueField: 'label',
-                    textField: 'value',
-                    width: 160,
-                    editable: false,
-                    data: [{
-                        label: 'yes',
-                        value: '是'
-                    },{
-                        label: 'no',
-                        value: '否'
-                    }]"></td>
-            </tr>
-            <tr>
                 <td class="head1">行业类型：</td>
                 <td><input type="text" id="industry-type"></td>
                 <td class="head1">所属区域：</td>
@@ -79,27 +56,8 @@
             </tr>
         </table>
     </div>
-    <script>
-        $("#validDate").datebox({
-            required: true,
-            width: 160,
-            editable: false,
-            formatter: function (date) {
-                var y = date.getFullYear();
-                var m = date.getMonth() + 1;
-                var d = date.getDate();
-                return y + '-' + m + '-' + d;
-            },
-        });
-        $('#validDate').datebox('calendar').calendar({
-            validator: function (date) {
-                var now = new Date();
-                var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-                return today <= date;
-            }
-        });
-    </script>
-    <script src="/views/customer/custom.js"></script>
+
+    <script src="/views/customer/custom_dialog.js"></script>
 </body>
 
 </html>

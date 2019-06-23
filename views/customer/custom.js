@@ -19,91 +19,6 @@ $('#custom-btn2').linkbutton({
     }
 });
 
-$("#custom-type").combobox({
-    // required: true,
-    valueField: 'id',
-    textField: 'text',
-    width: 160,
-    editable: false,
-    panelHeight: 'auto',
-    data: [{
-        id: 1,
-        text: '一般客户'
-    }, {
-        id: 2,
-        text: '重点客户'
-    }]
-});
-$("#industry-type").combobox({
-    valueField: 'id',
-    textField: 'text',
-    width: 160,
-    editable: false,
-    data: [{
-        id: 1,
-        text: '商业银行'
-    }, {
-        id: 2,
-        text: '企业'
-    }]
-});
-
-var areaData = [{
-    id: 1,
-    text: '成都市',
-    children: [{
-        id: 11,
-        text: "青羊区"
-    }, {
-        id: 12,
-        text: "武侯区"
-    }, {
-        id: 13,
-        text: "青白江区"
-    }, {
-        id: 14,
-        text: "锦江区"
-    }, {
-        id: 15,
-        text: "天府新区"
-    }, {
-        id: 16,
-        text: "高新西区"
-    }]
-}, {
-    id: 2,
-    text: '绵阳市',
-    children: [{
-        id: 21,
-        text: "青羊区"
-    }, {
-        id: 22,
-        text: "武侯区"
-    }, {
-        id: 23,
-        text: "青白江区"
-    }, {
-        id: 24,
-        text: "锦江区"
-    }, {
-        id: 25,
-        text: "天府新区"
-    }, {
-        id: 26,
-        text: "高新西区"
-    }]
-}];
-
-$("#area").combotree({
-    valueField: 'id',
-    textField: 'text',
-    width: 160,
-    editable: false,
-});
-
-$("#area").combotree('loadData', areaData);
-
-
 $('#custom-table').datagrid({
     url: '/customer/list',
     method: 'get',
@@ -115,6 +30,10 @@ $('#custom-table').datagrid({
         iconCls: 'icon-add',
         text: '新增客户',
         handler: addcustomer
+    },{
+        iconCls: 'icon-cancel',
+        text: '删除客户',
+        handler: deletecustomer
     }],
     columns: [
         [{
@@ -131,13 +50,27 @@ $('#custom-table').datagrid({
                 field: 'customerType',
                 title: '客户类型',
                 width: 100,
-                align: 'center'
+                align: 'center',
+                formatter: function (row) {
+                    if (row == 1) {
+                        return '一般客户';
+                    } else {
+                        return '重点客户';
+                    }
+                }
             },
             {
                 field: 'industryType',
                 title: '行业类型',
                 width: 100,
-                align: 'center'
+                align: 'center',
+                formatter: function (row) {
+                    if (row == 1) {
+                        return '商业银行';
+                    } else {
+                        return '企业';
+                    }
+                }
             },
             {
                 field: 'area',
@@ -156,10 +89,25 @@ $('#custom-table').datagrid({
                 title: '单位基本信息',
                 width: 100,
                 align: 'center'
+            },
+            {
+                field: 'actions',
+                title: '操作',
+                width: 100,
+                align: 'center',
+                formatter: function (value, row) {
+                    var rowString = row._id;
+                    return `<button class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick='exam("${rowString}")'>发起审批</button>`
+                
+                }
+
             }
         ]
     ],
 
+    onLoadSuccess: function(){
+        $.parser.parse();
+    }
 });
 
 
@@ -189,9 +137,6 @@ function sendcustomer() {
     var data = {
         name: $("#custom-name").val(),
         customerType: $("#custom-type").val(),
-        manager: $("#manager-name").val(),
-        tel: $("#manager-tel").val(),
-        email: $("#manager-email").val(),
         industryType: $("#industry-type").val(),
         area: $("#area").val(),
         validDate: $("#validDate").val(),
@@ -222,4 +167,51 @@ function sendcustomer() {
             }
         }
     });
+}
+
+
+function deletecustomer() {
+    confirm("确认要删除吗？");
+    var value = $('#custom-table').datagrid('getChecked');
+    if (value.length == 0) {
+        alert("请选中要删除的数据");
+        return;
+    }
+    var id = [];
+    for (const iterator of value) {
+        id.push(iterator._id);
+    }
+    $.ajax({
+        type: "delete",
+        url: "/customer/delete",
+        data: {
+            _id: id
+        },
+        success: function (response) {
+            if (response.code == 0) {
+                $('#custom-table').datagrid('reload');
+                alert("删除成功！");
+            } else {
+                alert("删除失败！");
+            }
+        }
+    });
+
+}
+
+function exam(id) {
+    sessionStorage.setItem('id', id);
+    if ($('#page').tabs('exists', '发起审批')){
+        alert("你有未完成事务");
+        $('#page').tabs('select', '发起审批');
+    }else{
+        $('#page').tabs('add', {
+            title: '发起审批',
+            href: `/project`,
+            closable:true,
+            selected: true,
+        });
+    } 
+    
+    
 }

@@ -18,18 +18,14 @@ $('#user-btn2').linkbutton({
         alert('重置')
     }
 });
-var userdb = ["name","tel","email","dpt","role"];
 
-for (const i of userdb) {
-    $("#user-"+i).textbox()
-}
 
 $('#user-table').datagrid({
     url: '/user/list',
     method: 'get',
     loadFilter: pagerFilter,
     pagination: true,
-    pageList: [1,2,5,10],
+    pageList: [1, 2, 5, 10],
     checkbox: true,
     toolbar: [{
         iconCls: 'icon-add',
@@ -47,10 +43,8 @@ $('#user-table').datagrid({
         }
     }, '-', {
         iconCls: 'icon-search',
-        text: '查找',
-        handler: function () {
-            alert('查找按钮')
-        }
+        text: '查看',
+        handler: lookuser
     }],
     columns: [
         [{
@@ -180,3 +174,32 @@ function deleteuser() {
 
 }
 
+var look_value = {};
+
+function lookuser() {
+    var value = $('#user-table').datagrid('getChecked');
+    if (value.length > 1 || value.length == 0) {
+        alert("请选择一个用户");
+        return;
+    }
+    look_value = value[0];
+    $('#user-dd').dialog({
+        title: '用户详情',
+        width: 600,
+        height: 400,
+        closed: false,
+        cache: false,
+        href: '/views/user/look-dialog.html',
+        modal: true,
+        buttons: [{
+            text: '关闭',
+            handler: function () {
+                $('#user-dd').dialog('close');
+            }
+        }],
+        
+    });
+   
+    
+
+}

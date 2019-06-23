@@ -1,0 +1,14 @@
+.login_page{
+    width: 300px;
+    height: 300px;
+    border: 2px rgb(75, 179, 248) solid;
+}
+
+.login_name,.login_psd{
+    height: 50px;
+    margin: 10px auto;
+}
+
+.login_sub{
+    margin: 0 auto;
+}

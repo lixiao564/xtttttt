@@ -1,4 +1,3 @@
-
 $('#page').tabs({
     border: false,
     fit: true,
@@ -21,7 +20,7 @@ var data = [{
             },
             {
                 name: '用户',
-                url: '/views/hero/user.html'
+                url: '/views/user/user.html'
             }
         ]
     },
@@ -45,10 +44,6 @@ var data = [{
         },
         children: [{
                 name: '客户列表',
-                url: '/views/customer/custom.html'
-            },
-            {
-                name: '客户管理',
                 url: '/views/customer/custom.html'
             }
         ]
@@ -118,21 +113,6 @@ $('div.panel-header:first').click(function () {
     }
 })
 
-var myEchart =  echarts.init(document.getElementById('echa'));
-myEchart.setOption({
-    title: {
-      text: 'ECharts 入门示例'
-    },
-    tooltip: {},
-    xAxis: {
-      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-    },
-    yAxis: {},
-    series: [{
-      name: '销量',
-      type: 'bar',
-      data: [5, 20, 36, 10, 10, 20]
-    }]
-  });
+
 // 第三个问题：这是动态生成的，要重新渲染一下easyui的样式
 $.parser.parse();
