@@ -72,6 +72,7 @@
 - `expectDate` 预计完成时间
 - `describe` 项目描述
 - `files` 项目附件
+- `uid` 客户经理id（后台自动保存）
 - `userName` 客户经理名称（只显示，不存project数据表）
 - `userTel` 客户经理电话（只显示，不存project数据表）
 - `customerName` 客户名称（只显示，不存project数据表）

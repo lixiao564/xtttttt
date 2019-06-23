@@ -2,6 +2,7 @@ const express = require('express');
       express_hbs = require('express-handlebars'),
       bodyParser = require('body-parser'),
       path = require('path'),
+      cookieParser = require('cookie-parser'),
       app = express();
 
 const home = require('./server/router/home'),
@@ -10,6 +11,7 @@ const home = require('./server/router/home'),
       customer = require('./server/router/customer');
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({
     extended: true
 }));

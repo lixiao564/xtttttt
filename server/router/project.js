@@ -9,16 +9,17 @@ const express = require('express'),
 
 
 router.get('/', (req, res) => {
-    const query = req.query;
+    const id = req.query.id;
     // 第一个参数表示模板的文件，默认从views文件夹里面去找
     res.render('project/add', {
         layout: null,
-        query: query
+        id: id
     });
 });
 
 router.get('/list', (req, res) => {
-    utils.find(projectModel, {}).then(data => {
+    const uid = req.cookies.userId;
+    utils.find(projectModel, {uid: uid}).then(data => {
         res.send({
             code: 0,
             data: {
@@ -64,7 +65,9 @@ router.get('/getMsg', (req, res) => {
 
 
 router.post('/add', (req, res) => {
+    const uid = req.cookies.userId;
     const body = req.body;
+    body.uid = uid;
     body.restStep = '2';
     utils.add(projectModel, body, {
         projectName: body.projectName

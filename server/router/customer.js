@@ -6,12 +6,9 @@ const express = require('express'),
       customerModel = models.customerModel;
 
 
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../views/customer/customer.html'));
-});
-
 router.get('/list', (req, res) => {
-    utils.find(customerModel, {}).then(data => {
+    const uid = req.cookies.userId;
+    utils.find(customerModel, {uid: uid}).then(data => {
         res.send({
             code: 0,
             data: {
@@ -26,7 +23,9 @@ router.get('/list', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
+    const uid = req.cookies.userId;
     const body = req.body;
+    body.uid = uid;
     utils.add(customerModel, body, {
         name: body.name
     }).then(data => {

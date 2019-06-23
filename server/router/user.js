@@ -5,6 +5,16 @@ const express = require('express'),
       models = require('./models'),
       userModel = models.userModel;
 
+utils.find(userModel, {
+    tel: 'admin'
+}).then(data => {
+    if (data.length == 0) {
+        utils.add(userModel, {
+            tel: 'admin',
+            password: 'admin'
+        })
+    }
+})
 
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../views/user/user.html'));
@@ -38,6 +48,26 @@ router.post('/add', (req, res) => {
         res.send({
             code: 0,
             data: data,
+            msg: ''
+        });
+    }).catch(err => {
+        res.send({
+            code: -1,
+            data: '',
+            msg: err
+        });
+    });
+});
+
+router.post('/check', (req, res) => {
+    const body = req.body;
+    utils.find(userModel, body).then(data => {
+        if (data.length == 1) {
+            res.cookie('userId', data[0]._id);
+        }
+        res.send({
+            code: 0,
+            data: data[0]._id,
             msg: ''
         });
     }).catch(err => {
