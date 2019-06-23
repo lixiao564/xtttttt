@@ -76,7 +76,6 @@ function submit() {
         dptHeadName: $("#dptHeadName").val(),
         dptHeadTel: $("#dptHeadTel").val(),
     };
-    console.log(h_data);
     var lev = $("#project_level").val();
     console.log();
     if (lev == 'A'){
@@ -105,11 +104,12 @@ function submit() {
             }
         }
     }
-        
+    var data = {};   
+    Object.assign(data,p_data,h_data); 
     $.ajax({
         type: "POST",
         url: "/project/add",
-        data: {p_data,h_data},
+        data: data,
         success: function (response) {
             if (response.code == 0) {
                 alert("提交成功！");
